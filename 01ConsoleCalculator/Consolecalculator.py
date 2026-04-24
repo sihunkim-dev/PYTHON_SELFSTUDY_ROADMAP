@@ -30,19 +30,44 @@ def precedence(operator):
 def solver(expr):
     numbersToken = []
     opToken = []
+    tokens = []
+    tempNum = ""
 
-    tokens = expr.split()
+    # 1. 토큰화 (괄호 추가)
+    for char in expr:
+        if char == " ": continue
+        if char.isdigit() or char == ".":
+            tempNum += char
+        else:
+            if tempNum:
+                tokens.append(tempNum)
+                tempNum = ""
+            tokens.append(char)
+    if tempNum: tokens.append(tempNum)
 
     # Tokenize the input expression
     for token in tokens:
-        if token.isdigit():
+        if token[0].isdigit():
             numbersToken.append(float(token))
-        else:
-            while opToken and precedence(opToken[-1]) >= precedence(token):
-                x = numbersToken.pop()
+        
+        elif token == "(":  # 여는 괄호는 무조건 push
+            opToken.append(token)
+            
+        elif token == ")":  # 닫는 괄호를 만나면
+            # 여는 괄호를 만날 때까지 쌓인 연산자들을 모두 계산
+            while opToken and opToken[-1] != "(":
                 y = numbersToken.pop()
-                operator = opToken.pop()
-                numbersToken.append(operation(y, x, operator))
+                x = numbersToken.pop()
+                op = opToken.pop()
+                numbersToken.append(operation(x, y, op))
+            opToken.pop()  # 마지막에 남아있는 "("를 스택에서 제거
+            
+        else:  # 일반 연산자 (+, -, *, /)
+            while opToken and opToken[-1] != "(" and precedence(opToken[-1]) >= precedence(token):
+                y = numbersToken.pop()
+                x = numbersToken.pop()
+                op = opToken.pop()
+                numbersToken.append(operation(x, y, op))
             opToken.append(token)
 
     while opToken:
@@ -66,4 +91,4 @@ while True:
     userEquation = input("Enter your equation: ")
     result = print(userEquation)
 
-    print(f"Result: {solver(userEquation)}")
+    print(f"Result: {solver(userEquation.replace(" ", ""))}")

@@ -20,7 +20,11 @@
 - `q` for the exit
 
 ## Trouble shootings
-- **Parsing**
-  - limiation of `isdigit()`
-    - It only returns `True` if object is between 0~9
-    - 
+- **Parsing** User Input
+  -  Remove *white space*
+  -  Set the *Priority*
+  
+
+## Execption Handling
+- Check whether is numerical or not
+  - `isdigit()` or `isspace()` 
