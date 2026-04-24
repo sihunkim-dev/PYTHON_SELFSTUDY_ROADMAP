@@ -1,9 +1,9 @@
 # PYTHON_STUDY_PROJECT
 
 ### CONSOLE
-|**NAME**|**LINKS**|
+|**INDEX**|**NAME**|
 |-----|-----|
-|Console Calculator||
+|1|![Console Calculator](https://github.com/sihunkim-dev/PYTHON_SELFSTUDY_ROADMAP/tree/main/01ConsoleCalculator)|
 
 
 ***
