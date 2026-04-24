@@ -1,1 +1,6 @@
 # PYTHON_STUDY_PROJECT
+
+### CONSOLE
+
+***
+### GUI
